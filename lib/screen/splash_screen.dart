@@ -1,25 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kashbook_app/config/config.dart';
+import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/utils/images.dart';
 
-class SlashScreen extends StatefulWidget {
-  const SlashScreen({super.key});
+class SplashScreen extends ConsumerStatefulWidget {
+  static SplashScreen builder(BuildContext context, GoRouterState state) =>
+      const SplashScreen();
+  const SplashScreen({super.key});
 
   @override
-  State<SlashScreen> createState() => _SlashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SlashScreenState extends State<SlashScreen> {
-  startTime() async {
-    const duration = Duration(seconds: 2);
-    return Timer(duration, navigationPage);
-  }
-
-  void navigationPage() {
-    Navigator.of(context).pushReplacementNamed('/ AuthSccreen');
-  }
-
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
@@ -27,10 +24,20 @@ class _SlashScreenState extends State<SlashScreen> {
     startTime();
   }
 
+  startTime() async {
+    const duration = Duration(seconds: 5);
+    return Timer(duration, navigationPage);
+  }
+
+  void navigationPage() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+    
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Image.asset(AppAssetsImage.appLogo)),
-    );
+    return const Scaffold(
+        body: Center(child: Image(image: AssetImage(AppAssetsImage.appLogo))));
   }
 }
