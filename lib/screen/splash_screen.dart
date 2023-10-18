@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:kashbook_app/utils/images.dart';
 
 class SlashScreen extends StatefulWidget {
   const SlashScreen({super.key});
@@ -11,8 +12,8 @@ class SlashScreen extends StatefulWidget {
 
 class _SlashScreenState extends State<SlashScreen> {
   startTime() async {
-    const _duration = Duration(seconds: 2);
-    return Timer(_duration, navigationPage);
+    const duration = Duration(seconds: 2);
+    return Timer(duration, navigationPage);
   }
 
   void navigationPage() {
@@ -28,6 +29,8 @@ class _SlashScreenState extends State<SlashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Image.asset('logo') ),);
+    return Scaffold(
+      body: Center(child: Image.asset(AppAssetsImage.appLogo)),
+    );
   }
 }
