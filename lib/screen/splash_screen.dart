@@ -30,15 +30,32 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-    
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const WelcomeScreen()));
   }
 
   @override
   Widget build(BuildContext context) {
-      
-    return const Scaffold(
-        body: Center(child: Image(image: AssetImage(AppAssetsImage.appLogo))));
+    final colors = context.colorScheme;
+    return Scaffold(
+        body: Center(
+            child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Image(
+          image: AssetImage(AppAssetsImage.appLogo),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Text(
+          'KASH BOOK',
+          style: TextStyle(
+              fontSize: 50.0,
+              fontWeight: FontWeight.bold,
+              color: colors.primary),
+        )
+      ],
+    )));
   }
 }
