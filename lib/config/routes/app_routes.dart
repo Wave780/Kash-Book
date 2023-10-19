@@ -22,5 +22,10 @@ final appRoutes = [
     path: RouteLocation.loginScreen,
     parentNavigatorKey: navigationKey,
     builder: WelcomeScreen.builder,
+  ),
+   GoRoute(
+    path: RouteLocation.createAcctScreen,
+    parentNavigatorKey: navigationKey,
+    builder: WelcomeScreen.builder,
   )
 ];
