@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/custom_button.dart';
+import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
+import 'package:kashbook_app/widgets/custom_textfield.dart';
 import 'package:kashbook_app/widgets/custome_circle.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -81,36 +83,5 @@ class LoginScreen extends ConsumerWidget {
         )
       ]),
     ));
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const TextField(
-      decoration: InputDecoration(
-          fillColor: Colors.transparent,
-          filled: true,
-          border: InputBorder.none),
-    );
-  }
-}
-
-class TextFieldTile extends StatelessWidget {
-  const TextFieldTile({
-    super.key,
-    required this.title,
-  });
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 20.0),
-    );
   }
 }
