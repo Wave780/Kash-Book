@@ -1,5 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kashbook_app/screen/create_acct_screen.dart';
+import 'package:kashbook_app/screen/forgot_passwrd_screen.dart';
+import 'package:kashbook_app/screen/login_screen.dart';
+import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/screen/welcome_screen.dart';
 import 'package:kashbook_app/screen/splash_screen.dart';
 
@@ -21,11 +25,21 @@ final appRoutes = [
   GoRoute(
     path: RouteLocation.loginScreen,
     parentNavigatorKey: navigationKey,
-    builder: WelcomeScreen.builder,
+    builder: LoginScreen.builder,
   ),
-   GoRoute(
+  GoRoute(
     path: RouteLocation.createAcctScreen,
     parentNavigatorKey: navigationKey,
-    builder: WelcomeScreen.builder,
+    builder: CreateAcctScreen.builder,
+  ),
+  GoRoute(
+    path: RouteLocation.forgottenPasswordScreen,
+    parentNavigatorKey: navigationKey,
+    builder: ForgottenPasswordScreen.builder,
+  ),
+  GoRoute(
+    path: RouteLocation.homeScreen,
+    parentNavigatorKey: navigationKey,
+    builder: HomeScreen.builder,
   )
 ];

@@ -8,4 +8,6 @@ class RouteLocation {
   static String get welcomeScreen => '/welcomeScreen';
   static String get loginScreen => '/loginScreen';
   static String get createAcctScreen => '/createAcctScreen';
+  static String get forgottenPasswordScreen => '/forgottenPasswordScreen';
+  static String get homeScreen => '/homeScreen';
 }
