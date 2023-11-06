@@ -12,33 +12,11 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sideNaveBar = ref.watch(sideNavBarProvider);
-    //  final bottomNaveBar = ref.watch(bottomNavBarProvider);
+   
     return Scaffold(
       drawer: sideNaveBar,
-      bottomNavigationBar: ButtomNavBar(
-        onItemTap: (int tappedIndex) {},
-        destinations: const [
-          NavigationDestination(
-              icon: Icon(Icons.home_outlined),
-              selectedIcon: Icon(Icons.home),
-              label: 'Home'),
-          NavigationDestination(
-              icon: Icon(Icons.account_balance_wallet_outlined),
-              selectedIcon: Icon(Icons.account_balance_wallet),
-              label: 'Account'),
-          NavigationDestination(
-              icon: Icon(Icons.account_balance_outlined),
-              selectedIcon: Icon(Icons.account_balance_rounded),
-              label: 'Debit'),
-          NavigationDestination(
-              icon: Icon(Icons.auto_graph_outlined),
-              selectedIcon: Icon(Icons.auto_graph_sharp),
-              label: 'Overview')
-        ],
-      ),
-      body: const Center(
-        child: Text('Home Screen'),
-      ),
+      bottomNavigationBar: const ButtomNavBar(),
+      
     );
   }
 }

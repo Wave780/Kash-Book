@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
 
-// final bottomNavBarProvider = Provider<ButtomNavBar>((ref) {
-//   return ButtomNavBar(
-//     destinations: const [],
-//     onItemTap: (int index) {},
-//   );
-// });
-
 class ButtomNavBar extends StatefulWidget {
-  final List<NavigationDestination> destinations;
-  final NavigationDestinationLabelBehavior? labelBehavior;
-  final int selectedIndex;
-  final void Function(int index) onItemTap;
-  final Color? backgroundColor;
   const ButtomNavBar({
     Key? key,
-    required this.destinations,
-    this.labelBehavior,
-    this.selectedIndex = 0,
-    required this.onItemTap,
-    this.backgroundColor,
   }) : super(key: key);
 
   @override
@@ -27,29 +10,59 @@ class ButtomNavBar extends StatefulWidget {
 }
 
 class _ButtomNavBarState extends State<ButtomNavBar> {
-  late int _selectedIndex;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _selectedIndex = widget.selectedIndex;
-  }
+  int selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
-    return NavigationBar(
-      labelBehavior: widget.labelBehavior,
-      backgroundColor: widget.backgroundColor,
-      selectedIndex: _selectedIndex,
-      onDestinationSelected: (int tappedIndex) {
-        setState(() {
-          _selectedIndex = tappedIndex;
-        });
-
-        widget.onItemTap(tappedIndex);
-      },
-      destinations: widget.destinations,
+    return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int tappedIndex) {
+          setState(() {
+            selectedIndex = tappedIndex;
+          });
+        },
+        selectedIndex: selectedIndex,
+        destinations: const [
+          NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: 'Home'),
+          NavigationDestination(
+              icon: Icon(Icons.account_balance_wallet_outlined),
+              selectedIcon: Icon(Icons.account_balance_wallet),
+              label: 'Account'),
+          NavigationDestination(
+              icon: Icon(Icons.account_balance_outlined),
+              selectedIcon: Icon(Icons.account_balance_rounded),
+              label: 'Debit'),
+          NavigationDestination(
+              icon: Icon(Icons.auto_graph_outlined),
+              selectedIcon: Icon(Icons.auto_graph_sharp),
+              label: 'Overview')
+        ],
+      ),
+      body: <Widget>[
+        Container(
+          color: Colors.red,
+          alignment: Alignment.center,
+          child: const Text('Page 1'),
+        ),
+        Container(
+          color: Colors.green,
+          alignment: Alignment.center,
+          child: const Text('Page 2'),
+        ),
+        Container(
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: const Text('Page 3'),
+        ),
+        Container(
+          color: Colors.yellow,
+          alignment: Alignment.center,
+          child: const Text('Page 4'),
+        ),
+      ][selectedIndex],
     );
   }
 }
