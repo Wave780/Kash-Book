@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kashbook_app/utils/extension.dart';
+import 'package:kashbook_app/widgets/acctount_card.dart';
 import 'package:kashbook_app/widgets/greeting_widget.dart';
+
+const List<String> list = <String>['Day', 'Month', 'Year'];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String drpodownValue = list.first;
   @override
   Widget build(BuildContext context) {
     final nairaFormat = NumberFormat.currency(
@@ -27,145 +31,106 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Home',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  ),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.person_2))
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('John',
+          child: Stack(children: [
+            Positioned(
+                bottom: 3.0,
+                right: 6.0,
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  backgroundColor: colors.primary,
+                  child: const Icon(Icons.add),
+                )),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Home',
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                  GreetingWidget(
-                    prefixText: 'Welcome,',
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Card(
-                color: colors.primary,
-                child: SizedBox(
-                  height: 200,
-                  width: 600,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Account Name',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w600,
-                              color: colors.background),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Total Balance',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: colors.background),
-                        ),
-                        Text(
-                          formattedNumber,
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
-                              color: colors.background),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Total',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: colors.background),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.arrow_drop_down_sharp,
-                                      color: Colors.green,
-                                    ),
-                                    Text(
-                                      'Income',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
-                                          color: colors.background),
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  formattedNumber,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: colors.background),
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.arrow_drop_up_sharp,
-                                      color: Colors.red,
-                                    ),
-                                    Text(
-                                      'Expense',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
-                                          color: colors.background),
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  formattedNumber,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: colors.background),
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
-                  ),
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.person_2))
+                  ],
                 ),
-              )
-            ],
-          ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('John',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    GreetingWidget(
+                      prefixText: 'Welcome,',
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                AccountCard(colors: colors, formattedNumber: formattedNumber),
+                const SizedBox(
+                  height: 20,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      DropdownMenu(
+                          width: 110,
+                          initialSelection: list.first,
+                          onSelected: (String? value) {
+                            setState(() {
+                              drpodownValue = value!;
+                            });
+                          },
+                          dropdownMenuEntries: list
+                              .map<DropdownMenuEntry<String>>((String value) {
+                            return DropdownMenuEntry<String>(
+                                value: value, label: value);
+                          }).toList()),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      DropdownMenu(
+                          width: 110,
+                          initialSelection: list.first,
+                          onSelected: (String? value) {
+                            setState(() {
+                              drpodownValue = value!;
+                            });
+                          },
+                          dropdownMenuEntries: list
+                              .map<DropdownMenuEntry<String>>((String value) {
+                            return DropdownMenuEntry<String>(
+                                value: value, label: value);
+                          }).toList()),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      DropdownMenu(
+                          width: 110,
+                          initialSelection: list.first,
+                          onSelected: (String? value) {
+                            setState(() {
+                              drpodownValue = value!;
+                            });
+                          },
+                          dropdownMenuEntries: list
+                              .map<DropdownMenuEntry<String>>((String value) {
+                            return DropdownMenuEntry<String>(
+                                value: value, label: value);
+                          }).toList())
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ]),
         ));
   }
 }
