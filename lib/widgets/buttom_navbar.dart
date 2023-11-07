@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kashbook_app/screen/screen.dart';
 
 class ButtomNavBar extends StatefulWidget {
   const ButtomNavBar({
@@ -10,7 +11,7 @@ class ButtomNavBar extends StatefulWidget {
 }
 
 class _ButtomNavBarState extends State<ButtomNavBar> {
-  int selectedIndex = 1;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +43,7 @@ class _ButtomNavBarState extends State<ButtomNavBar> {
         ],
       ),
       body: <Widget>[
-        Container(
-          color: Colors.red,
-          alignment: Alignment.center,
-          child: const Text('Page 1'),
-        ),
+        const HomeScreen(),
         Container(
           color: Colors.green,
           alignment: Alignment.center,

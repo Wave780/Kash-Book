@@ -40,6 +40,6 @@ final appRoutes = [
   GoRoute(
     path: RouteLocation.homeScreen,
     parentNavigatorKey: navigationKey,
-    builder: HomeScreen.builder,
+    builder: RootScreen.builder,
   )
 ];

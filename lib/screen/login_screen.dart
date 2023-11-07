@@ -81,7 +81,7 @@ class LoginScreen extends ConsumerWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
+                            builder: (context) => const RootScreen()));
                   },
                   child: CustomButton(
                     deviceSize: deviceSize.width * 0.70,
