@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/acctount_card.dart';
+import 'package:kashbook_app/widgets/container_selector.dart';
 import 'package:kashbook_app/widgets/greeting_widget.dart';
 
 const List<String> list = <String>['Day', 'Month', 'Year'];
@@ -76,55 +77,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                SingleChildScrollView(
+                const SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      DropdownMenu(
-                          width: 110,
-                          initialSelection: list.first,
-                          onSelected: (String? value) {
-                            setState(() {
-                              drpodownValue = value!;
-                            });
-                          },
-                          dropdownMenuEntries: list
-                              .map<DropdownMenuEntry<String>>((String value) {
-                            return DropdownMenuEntry<String>(
-                                value: value, label: value);
-                          }).toList()),
-                      const SizedBox(
+                      DropdownContainer(
+                        text: '',
+                        dropArrowIcon: Icon(Icons.abc),
+                        
+                      ),
+                      SizedBox(
                         width: 10,
                       ),
-                      DropdownMenu(
-                          width: 110,
-                          initialSelection: list.first,
-                          onSelected: (String? value) {
-                            setState(() {
-                              drpodownValue = value!;
-                            });
-                          },
-                          dropdownMenuEntries: list
-                              .map<DropdownMenuEntry<String>>((String value) {
-                            return DropdownMenuEntry<String>(
-                                value: value, label: value);
-                          }).toList()),
-                      const SizedBox(
+                      DropdownContainer(
+                          text: 'Selecte date',
+                          dropArrowIcon: Icon(Icons.arrow_downward)),
+                      SizedBox(
                         width: 10,
                       ),
-                      DropdownMenu(
-                          width: 110,
-                          initialSelection: list.first,
-                          onSelected: (String? value) {
-                            setState(() {
-                              drpodownValue = value!;
-                            });
-                          },
-                          dropdownMenuEntries: list
-                              .map<DropdownMenuEntry<String>>((String value) {
-                            return DropdownMenuEntry<String>(
-                                value: value, label: value);
-                          }).toList())
+                      DropdownContainer(
+                          text: 'Selecte date',
+                          dropArrowIcon: Icon(Icons.arrow_downward)),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      DropdownContainer(
+                          text: 'Selecte date',
+                          dropArrowIcon: Icon(Icons.arrow_downward))
                     ],
                   ),
                 )
