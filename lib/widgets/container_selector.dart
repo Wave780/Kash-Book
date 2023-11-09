@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:kashbook_app/utils/extension.dart';
-import 'package:kashbook_app/widgets/show_buttom_sheet.dart';
 
 class DropdownContainer extends StatefulWidget {
   final String text;
-
-  final Icon dropArrowIcon;
+  final VoidCallback onTapAction;
+  final Icon? dropArrowIcon;
   const DropdownContainer({
     Key? key,
     required this.text,
-    required this.dropArrowIcon,
+    required this.onTapAction,
+    this.dropArrowIcon,
   }) : super(key: key);
 
   @override
@@ -19,7 +20,7 @@ class DropdownContainer extends StatefulWidget {
 class _DropdownContainerState extends State<DropdownContainer> {
   final List<bool> _checked = List<bool>.filled(5, true);
 
-  void _toggleCheckbox(int index) {
+  void toggleCheckbox(int index) {
     setState(() {
       _checked[index] = !_checked[index];
     });
@@ -29,6 +30,7 @@ class _DropdownContainerState extends State<DropdownContainer> {
   Widget build(BuildContext context) {
     final colors = context.colorScheme;
     return InkWell(
+        onTap: widget.onTapAction,
         child: Container(
           decoration: BoxDecoration(
               color: colors.onPrimary,
@@ -49,15 +51,6 @@ class _DropdownContainerState extends State<DropdownContainer> {
               ],
             ),
           ),
-        ),
-        onTap: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) => const SizedBox(
-              height: 200,
-              child: RadioButton(),
-            ),
-          );
-        });
+        ));
   }
 }

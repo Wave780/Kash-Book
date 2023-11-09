@@ -4,6 +4,7 @@ import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/acctount_card.dart';
 import 'package:kashbook_app/widgets/container_selector.dart';
 import 'package:kashbook_app/widgets/greeting_widget.dart';
+import 'package:kashbook_app/widgets/radio_button_widget.dart';
 
 const List<String> list = <String>['Day', 'Month', 'Year'];
 
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String drpodownValue = list.first;
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final formattedNumber = nairaFormat.format(1000);
     final colors = context.colorScheme;
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           toolbarHeight: 20,
           elevation: 0,
@@ -77,33 +80,67 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
                       DropdownContainer(
                         text: '',
-                        dropArrowIcon: Icon(Icons.abc),
-                        
+                        dropArrowIcon: const Icon(Icons.abc),
+                        onTapAction: () {
+                          // showModalBottomSheet(
+                          //     context: context,
+                          //     builder: (context) => const SizedBox(
+                          //           height: 200,
+                          //           child: RadioButtonWidget(),
+                          //         ));
+                          // print('object');
+                          ButtomSheet().showBottomSheet(
+                              context: _scaffoldKey.currentContext!);
+                        },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       DropdownContainer(
-                          text: 'Selecte date',
-                          dropArrowIcon: Icon(Icons.arrow_downward)),
-                      SizedBox(
+                        text: 'Select Date',
+                        onTapAction: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) => const SizedBox(
+                                    height: 200,
+                                    child: RadioButtonWidget(),
+                                  ));
+                        },
+                      ),
+                      const SizedBox(
                         width: 10,
                       ),
                       DropdownContainer(
-                          text: 'Selecte date',
-                          dropArrowIcon: Icon(Icons.arrow_downward)),
-                      SizedBox(
+                        text: 'Entry Type',
+                        onTapAction: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) => const SizedBox(
+                                    height: 200,
+                                    child: RadioButtonWidget(),
+                                  ));
+                        },
+                      ),
+                      const SizedBox(
                         width: 10,
                       ),
                       DropdownContainer(
-                          text: 'Selecte date',
-                          dropArrowIcon: Icon(Icons.arrow_downward))
+                        text: 'Payment Mode',
+                        onTapAction: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) => const SizedBox(
+                                    height: 200,
+                                    child: RadioButtonWidget(),
+                                  ));
+                        },
+                      )
                     ],
                   ),
                 )
@@ -111,5 +148,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ]),
         ));
+  }
+}
+
+class ButtomSheet {
+  void showBottomSheet({required BuildContext context}) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => const SizedBox(
+        height: 200,
+        child: RadioButtonWidget(),
+      ),
+    );
   }
 }
