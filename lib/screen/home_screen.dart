@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kashbook_app/screen/add_member_screen.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/acctount_card.dart';
 import 'package:kashbook_app/widgets/container_selector.dart';
@@ -56,7 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
                     IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.person_2))
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AddMemberScreen()));
+                        },
+                        icon: const Icon(Icons.person_2))
                   ],
                 ),
                 const SizedBox(
@@ -107,9 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTapAction: () {
                           showModalBottomSheet(
                               context: context,
-                              builder: (context) => const SizedBox(
+                              builder: (context) => SizedBox(
                                     height: 200,
-                                    child: RadioButtonWidget(),
+                                    child:
+                                        RadioButtonWidget(listItem: listItem),
                                   ));
                         },
                       ),
@@ -123,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context: context,
                               builder: (context) => const SizedBox(
                                     height: 200,
-                                    child: RadioButtonWidget(),
+                                    //child: RadioButtonWidget(),
                                   ));
                         },
                       ),
@@ -137,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context: context,
                               builder: (context) => const SizedBox(
                                     height: 200,
-                                    child: RadioButtonWidget(),
+                                    //child: RadioButtonWidget(),
                                   ));
                         },
                       )
@@ -157,7 +168,7 @@ class ButtomSheet {
       context: context,
       builder: (context) => const SizedBox(
         height: 200,
-        child: RadioButtonWidget(),
+        // child: RadioButtonWidget(),
       ),
     );
   }
