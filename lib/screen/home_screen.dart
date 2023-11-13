@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (context) => SizedBox(
                                     height: 200,
                                     child:
-                                        RadioButtonWidget(listItem: listItem),
+                                        RadioButtonWidget(listItem: selectDate),
                                   ));
                         },
                       ),
@@ -132,9 +132,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTapAction: () {
                           showModalBottomSheet(
                               context: context,
-                              builder: (context) => const SizedBox(
+                              builder: (context) => SizedBox(
                                     height: 200,
-                                    //child: RadioButtonWidget(),
+                                    child:
+                                        RadioButtonWidget(listItem: entryType),
                                   ));
                         },
                       ),
@@ -146,9 +147,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTapAction: () {
                           showModalBottomSheet(
                               context: context,
-                              builder: (context) => const SizedBox(
+                              builder: (context) => SizedBox(
                                     height: 200,
-                                    //child: RadioButtonWidget(),
+                                    child: RadioButtonWidget(
+                                        listItem: paymentMode),
                                   ));
                         },
                       )

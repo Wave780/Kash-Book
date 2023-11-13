@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:kashbook_app/widgets/custom_radio_button.dart';
 
-final List listItem = ['day', 'month', 'year'];
+final List selectDate = ['day', 'month', 'year'];
+final List paymentMode = ['No Payment Mode', 'Cash', 'Online'];
+final List entryType = ['All', 'Cash In', 'Cash out'];
 
 class RadioButtonWidget extends StatefulWidget {
   final List listItem;
