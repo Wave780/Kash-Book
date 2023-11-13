@@ -1,12 +1,12 @@
 // Ask for permision first
 
+import 'dart:typed_data';
+
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:kashbook_app/utils/extension.dart';
 import 'package:path/path.dart';
-
-// Create the List
-List<Contact> contacts = [];
 
 class AddMemberScreen extends StatefulWidget {
   const AddMemberScreen({super.key});
@@ -16,21 +16,47 @@ class AddMemberScreen extends StatefulWidget {
 }
 
 class _AddMemberScreenState extends State<AddMemberScreen> {
+  TextEditingController searchController = TextEditingController();
+  // Create the List
+  List<Contact> contacts = [];
+  List<Contact> contactFiltered = [];
+
+  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
-    onReady();
+    Future.delayed(const Duration(seconds: 2), () async {
+      List<Contact> fetchedContacts = await ContactsService.getContacts();
+
+      setState(() {
+        contacts = fetchedContacts;
+        isLoading = false;
+      });
+    });
+    searchController.addListener(() {
+      filterContacts();
+    });
     //askPermissions(null);
   }
 
-  onReady() async {
-    List<Contact> contact =
-        await ContactsService.getContacts(withThumbnails: false);
-
-    //contact = contact.where((element) => element.phones!.isNotEmpty).toList();
-    setState(() {
-      contacts = contact;
-    });
+  void filterContacts() {
+    List<Contact> contacts = [];
+    contacts.addAll(contacts);
+    if (searchController.text.isNotEmpty) {
+      contacts.where((contact) {
+        String searchItem = searchController.text.toLowerCase();
+        String contactName = contact.displayName!.toLowerCase();
+        // bool nameMatches = contactName.contains(searchItem);
+        // if (nameMatches == true) {
+        //   return true;
+        // }
+        return contactName.contains(searchItem);
+      });
+      setState(() {
+        contactFiltered = contacts;
+      });
+    }
   }
 
   Future<void> askPermissions(String? routeName) async {
@@ -68,21 +94,78 @@ class _AddMemberScreenState extends State<AddMemberScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorScheme;
+    bool isSearching = searchController.text.isNotEmpty;
     return Scaffold(
-        appBar: AppBar(title: const Text('Contacts Plugin Example')),
-        body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: contacts.length,
-          itemBuilder: (context, index) {
-            Contact contact = contacts[index];
+        appBar: AppBar(title: const Text('Add Team Member')),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                    labelText: 'Search',
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: colors.primary)),
+                    prefixIcon: const Icon(Icons.search)),
+                onChanged: (value) {},
+              ),
+              Expanded(
+                  child: FutureBuilder(
+                      future: Future.delayed(const Duration(seconds: 2)),
+                      builder: (context, snapshot) {
+                        if (isLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: isSearching == true
+                              ? contactFiltered.length
+                              : contacts.length,
+                          itemBuilder: (context, index) {
+                            Contact contact = isSearching == true
+                                ? contactFiltered[index]
+                                : contacts[index];
 
-            var phones = contact.phones;
-            return ListTile(
-              title: Text(contact.displayName.toString()),
-              subtitle:
-                  Text((phones!.isEmpty ? 13 : phones[0].value).toString()),
-            );
-          },
+                            var phones = contact.phones;
+                            return ListTile(
+                              trailing: InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //           ));
+                                },
+                                child: Text(
+                                  'INVITE',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: colors.primary),
+                                ),
+                              ),
+                              title: Text(contact.displayName.toString()),
+                              subtitle: Text((phones!.isEmpty
+                                      ? 'No phone number'
+                                      : phones[0].value)
+                                  .toString()),
+                              leading: (contact.avatar != null &&
+                                      contact.avatar!.isNotEmpty)
+                                  ? CircleAvatar(
+                                      backgroundImage:
+                                          MemoryImage(Uint8List(0)))
+                                  : CircleAvatar(
+                                      child: Text(contact.initials()),
+                                    ),
+                            );
+                          },
+                        );
+                      }))
+            ],
+          ),
         ));
   }
 }
