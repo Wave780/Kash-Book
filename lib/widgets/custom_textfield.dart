@@ -9,9 +9,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return const TextField(
       decoration: InputDecoration(
-          fillColor: Colors.transparent,
-          filled: true,
-          border: InputBorder.none),
+          fillColor: Colors.white, filled: true, border: InputBorder.none),
     );
   }
 }
