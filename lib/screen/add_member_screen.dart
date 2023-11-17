@@ -33,7 +33,9 @@ class AddMemberScreen extends StatelessWidget {
             ),
           ),
           onTap: () {
-            const ViewRoleBottomSheetScreen();
+            showModalBottomSheet(
+                context: context,
+                builder: (context) => const ViewRoleBottomSheetScreen());
           },
         ),
         const Divider(
