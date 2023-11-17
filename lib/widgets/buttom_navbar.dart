@@ -44,11 +44,7 @@ class _ButtomNavBarState extends State<ButtomNavBar> {
       ),
       body: <Widget>[
         const HomeScreen(),
-        Container(
-          color: Colors.green,
-          alignment: Alignment.center,
-          child: const Text('Page 2'),
-        ),
+        const AccountScreen(),
         Container(
           color: Colors.blue,
           alignment: Alignment.center,

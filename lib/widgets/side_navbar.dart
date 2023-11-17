@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:kashbook_app/screen/root_screen.dart';
+import 'package:kashbook_app/utils/extension.dart';
+
 final sideNavBarProvider = Provider<SideNavBar>((ref) {
   return const SideNavBar();
 });
@@ -10,13 +13,14 @@ class SideNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorScheme;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.indigo),
-            child: Text(
+          DrawerHeader(
+            decoration: BoxDecoration(color: colors.primary),
+            child: const Text(
               'Menu',
               style: TextStyle(
                   fontSize: 30,
@@ -27,7 +31,10 @@ class SideNavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Home'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const RootScreen()));
+            },
           ),
           const SizedBox(
             height: 20,
