@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/acctount_card.dart';
 
+import 'create_account_buttom_sheet.dart';
+
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
@@ -66,7 +68,9 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: SizedBox(
                   height: 60,
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      createAcctountButtomSheet(context);
+                    },
                     backgroundColor: colors.inversePrimary,
                     child: const Icon(Icons.add),
                   ),
