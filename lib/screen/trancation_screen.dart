@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
 import 'package:kashbook_app/widgets/custom_textfield.dart';
 
@@ -81,7 +82,22 @@ class _TranscationScreenState extends State<TranscationScreen> {
                               ],
                             )),
                       ),
-                      TimeDatePicker(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const TimeDatePicker(),
+                      SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HomeScreen()));
+                              },
+                              child: const Text('SAVE')))
                     ],
                   ),
                 )

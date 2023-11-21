@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kashbook_app/utils/extension.dart';
 
 class TimeDatePicker extends StatefulWidget {
   const TimeDatePicker({super.key});
@@ -36,6 +37,7 @@ class _TimeDatePickerState extends State<TimeDatePicker> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -43,9 +45,15 @@ class _TimeDatePickerState extends State<TimeDatePicker> {
           onTap: () => selectDate(context),
           child: Row(
             children: [
-              const Icon(Icons.calendar_today_sharp),
+              Icon(
+                Icons.calendar_today_sharp,
+                color: colors.primary,
+              ),
               Text(' ${DateFormat('yyyy-MM-dd').format(selectedDate)}',
-                  style: const TextStyle(fontSize: 16)),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: colors.primary,
+                  )),
             ],
           ),
         ),
@@ -53,9 +61,15 @@ class _TimeDatePickerState extends State<TimeDatePicker> {
           onTap: () => selectTime(context),
           child: Row(
             children: [
-              const Icon(Icons.punch_clock),
+              Icon(
+                Icons.punch_clock,
+                color: colors.primary,
+              ),
               Text(selectedTime.format(context),
-                  style: const TextStyle(fontSize: 16)),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: colors.primary,
+                  )),
             ],
           ),
         ),
