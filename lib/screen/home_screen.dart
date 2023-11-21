@@ -42,7 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 bottom: 3.0,
                 right: 6.0,
                 child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TranscationScreen()));
+                  },
                   backgroundColor: colors.primary,
                   child: const Icon(Icons.add),
                 )),
