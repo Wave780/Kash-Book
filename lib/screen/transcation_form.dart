@@ -23,7 +23,9 @@ class TranscationForm extends StatelessWidget {
         const TextFieldTile(
           title: 'Amount',
         ),
-        const CustomTextField(),
+        const CustomNumTextField(
+          hintText: '0.00',
+        ),
         const TextFieldTile(
           title: 'Description',
         ),
