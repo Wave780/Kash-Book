@@ -5,6 +5,7 @@ import 'package:kashbook_app/screen/selector_button.dart';
 import 'package:kashbook_app/screen/time_date_picker.dart';
 import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
 import 'package:kashbook_app/widgets/custom_textfield.dart';
+import 'package:kashbook_app/widgets/detail_account_card.dart';
 
 class TranscationForm extends StatelessWidget {
   const TranscationForm({
@@ -44,7 +45,7 @@ class TranscationForm extends StatelessWidget {
                   SizedBox(
                     width: 15,
                   ),
-                  Text('Attach Imagenor PDF'),
+                  Text('Attach Image or PDF'),
                 ],
               )),
         ),
@@ -82,6 +83,27 @@ class TranscationForm extends StatelessWidget {
               onTap: () {},
             ),
           ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const TextFieldTile(
+          title: 'Select Account',
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              DetailAccountCard(),
+              DetailAccountCard(),
+              DetailAccountCard(),
+              DetailAccountCard(),
+              DetailAccountCard(),
+            ],
+          ),
         ),
         const SizedBox(
           height: 10,

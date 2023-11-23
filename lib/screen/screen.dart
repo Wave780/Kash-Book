@@ -7,7 +7,7 @@ export 'root_screen.dart';
 export 'home_screen.dart';
 export 'account_screen.dart';
 export 'debit_screen.dart';
-export 'overview_screen.dart';
+export 'statistics_screen.dart';
 export 'add_member_button.dart';
 export 'add_member_screen.dart';
 export 'viewrole_bottomsheet_screen.dart';

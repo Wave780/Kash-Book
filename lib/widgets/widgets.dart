@@ -8,3 +8,4 @@ export 'container_selector.dart';
 export 'custom_radio_button.dart';
 export 'radio_button_widget.dart';
 export 'roleinfo_container.dart';
+export 'detail_account_card.dart';

@@ -50,11 +50,7 @@ class _ButtomNavBarState extends State<ButtomNavBar> {
           alignment: Alignment.center,
           child: const Text('Page 3'),
         ),
-        Container(
-          color: Colors.yellow,
-          alignment: Alignment.center,
-          child: const Text('Page 4'),
-        ),
+        const StatisticsScreen()
       ][selectedIndex],
     );
   }
