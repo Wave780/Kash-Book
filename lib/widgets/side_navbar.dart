@@ -48,14 +48,6 @@ class SideNavBar extends StatelessWidget {
             height: 20,
           ),
           ListTile(
-            leading: const Icon(Icons.list_alt_sharp),
-            title: const Text('Budget'),
-            onTap: () {},
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ListTile(
             leading: const Icon(Icons.note),
             title: const Text('Report'),
             onTap: () {},

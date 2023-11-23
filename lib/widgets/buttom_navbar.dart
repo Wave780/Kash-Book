@@ -33,13 +33,13 @@ class _ButtomNavBarState extends State<ButtomNavBar> {
               selectedIcon: Icon(Icons.account_balance_wallet),
               label: 'Account'),
           NavigationDestination(
-              icon: Icon(Icons.account_balance_outlined),
-              selectedIcon: Icon(Icons.account_balance_rounded),
-              label: 'Debit'),
+              icon: Icon(Icons.note_alt_outlined),
+              selectedIcon: Icon(Icons.note_alt),
+              label: 'Transcation'),
           NavigationDestination(
-              icon: Icon(Icons.auto_graph_outlined),
-              selectedIcon: Icon(Icons.auto_graph_sharp),
-              label: 'Overview')
+              icon: Icon(Icons.pie_chart_outline),
+              selectedIcon: Icon(Icons.pie_chart),
+              label: 'Statistics')
         ],
       ),
       body: <Widget>[
