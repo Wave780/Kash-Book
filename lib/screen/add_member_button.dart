@@ -1,7 +1,7 @@
 // Ask for permision first
 
 import 'dart:typed_data';
-
+import 'package:searchfield/searchfield.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
@@ -184,6 +184,32 @@ class _AddMemberButtonState extends State<AddMemberButton> {
                               );
                             }))
                   ],
+                ),
+                SearchField<String>(
+                  suggestions: contacts
+                      .map(
+                        (e) => SearchFieldListItem<String>(
+                          e.displayName.toString(),
+                          item: e.toString(),
+                          // Use child to show Custom Widgets in the suggestions
+                          // defaults to Text widget
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                // CircleAvatar(
+                                //   backgroundImage: NetworkImage(e.flag),
+                                // ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(e.displayName.toString()),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
               ],
             )));

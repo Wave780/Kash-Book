@@ -12,3 +12,5 @@ export 'add_member_button.dart';
 export 'add_member_screen.dart';
 export 'viewrole_bottomsheet_screen.dart';
 export 'trancation_screen.dart';
+export 'category_screen.dart';
+export 'add_category_sccreen.dart';

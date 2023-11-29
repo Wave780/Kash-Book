@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:kashbook_app/provider/account_card_notifier.dart';
 
 import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/utils/extension.dart';
@@ -22,11 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   String drpodownValue = list.first;
   @override
   Widget build(BuildContext context) {
-    final nairaFormat = NumberFormat.currency(
-      symbol: '₦',
-      locale: 'en_NG',
-    );
-    final formattedNumber = nairaFormat.format(1000);
+
+
     final colors = context.colorScheme;
     return Scaffold(
         key: _scaffoldKey,
@@ -90,7 +89,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                AccountCard(colors: colors, formattedNumber: formattedNumber),
+                Consumer(
+                  builder:
+                      (BuildContext context, WidgetRef ref, Widget? child) {
+                    return AccountCard(
+                        colors: colors,
+                        formattedNumber:
+                            ref.watch(accountCardProvider) ?? 'Select a card');
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),

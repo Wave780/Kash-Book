@@ -4,6 +4,7 @@ import 'package:kashbook_app/utils/extension.dart';
 
 class SelectorButton extends StatefulWidget {
   final List<String> options;
+
   final int selectedIndex;
   final void Function(int) onChanged;
   const SelectorButton({
@@ -16,6 +17,7 @@ class SelectorButton extends StatefulWidget {
   @override
   State<SelectorButton> createState() => _SelectorButtonState();
 }
+
 class _SelectorButtonState extends State<SelectorButton> {
   @override
   Widget build(BuildContext context) {
@@ -32,10 +34,16 @@ class _SelectorButtonState extends State<SelectorButton> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             decoration: BoxDecoration(
-              color: isSelected ? colors.inversePrimary : Colors.grey,
+              color: isSelected ? colors.primary : Colors.grey,
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Text(option),
+            child: Text(
+              option,
+              style: TextStyle(
+                  color: colors.background,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
           ),
         );
       }).toList(),

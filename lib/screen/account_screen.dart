@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:kashbook_app/provider/account_card_notifier.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/acctount_card.dart';
 
@@ -15,12 +17,9 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
-    final nairaFormat = NumberFormat.currency(
-      symbol: '₦',
-      locale: 'en_NG',
-    );
+    
     final colors = context.colorScheme;
-    final formattedNumber = nairaFormat.format(1000);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 20,
@@ -55,10 +54,21 @@ class _AccountScreenState extends State<AccountScreen> {
               Expanded(
                 child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: 6,
-                    itemBuilder: (context, index) => AccountCard(
-                          colors: colors,
-                          formattedNumber: formattedNumber,
+                    itemCount: numberFormate.length,
+                    itemBuilder: (context, index) => Consumer(
+                          builder: (BuildContext context, WidgetRef ref,
+                              Widget? child) {
+                            return InkWell(
+                              onTap: () {
+                                ref.watch(accountCardProvider.notifier).state =
+                                    numberFormate[index];
+                              },
+                              child: AccountCard(
+                                colors: colors,
+                                formattedNumber: numberFormate[index],
+                              ),
+                            );
+                          },
                         )),
               )
             ]),
@@ -79,3 +89,18 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 }
+
+List<dynamic> numberFormate = [
+  NumberFormat.currency(
+    symbol: '₦',
+    locale: 'en_NG',  
+  ).format(1000),
+  NumberFormat.currency(
+    symbol: '₦',
+    locale: 'en_NG',
+  ).format(3000),
+  NumberFormat.currency(
+    symbol: '₦',
+    locale: 'en_NG',
+  ).format(2000),
+];

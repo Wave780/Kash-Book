@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:kashbook_app/screen/root_screen.dart';
+import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/utils/extension.dart';
 
 final sideNavBarProvider = Provider<SideNavBar>((ref) {
@@ -42,7 +42,12 @@ class SideNavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.category),
             title: const Text('Category'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CategoryScreen()));
+            },
           ),
           const SizedBox(
             height: 20,
