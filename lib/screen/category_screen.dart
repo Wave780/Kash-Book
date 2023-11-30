@@ -18,6 +18,7 @@ class CategoryScreen extends ConsumerWidget {
       ),
       body: Stack(children: [
         ListView.builder(
+            
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items[index];
