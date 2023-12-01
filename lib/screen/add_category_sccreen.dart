@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kashbook_app/model/category_item.dart';
 import 'package:kashbook_app/provider/items_provider.dart';
 import 'package:kashbook_app/screen/screen.dart';
+import 'package:kashbook_app/widgets/add_category_icon.dart';
 
 import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
 import 'package:kashbook_app/widgets/custom_textfield.dart';
@@ -35,6 +36,16 @@ class AddCategoryScreen extends StatelessWidget {
             CustomTextField(
               controller: itemTitle,
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            OutlinedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => const AddIconScreen());
+                },
+                child: const Text('Select an Icons')),
             const SizedBox(
               height: 50,
             ),
