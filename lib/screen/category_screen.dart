@@ -11,17 +11,17 @@ class CategoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colorScheme;
-    final items = ref.watch(itemsProvider);
+    final savedItems = ref.watch(itemsProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text(' Category'),
       ),
       body: Stack(children: [
         ListView.builder(
-            
-            itemCount: items.length,
+            itemCount: savedItems.length,
             itemBuilder: (context, index) {
-              final item = items[index];
+              final item = savedItems[index];
+              // final icon = icons;
               return ListTile(
                 leading: Icon(item.icon),
                 title: Text(item.name),

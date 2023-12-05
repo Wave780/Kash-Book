@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kashbook_app/model/category_item.dart';
 import 'package:kashbook_app/provider/items_provider.dart';
+import 'package:kashbook_app/provider/selected_icon_provider.dart';
 import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/widgets/add_category_icon.dart';
 
 import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
 import 'package:kashbook_app/widgets/custom_textfield.dart';
 
-class AddCategoryScreen extends StatelessWidget {
+class AddCategoryScreen extends ConsumerWidget {
   const AddCategoryScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final itemTitle = TextEditingController();
+
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 20,
@@ -56,10 +58,21 @@ class AddCategoryScreen extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                         onPressed: () {
-                          final newItem = Item(
-                            name: itemTitle.text,
-                            icon: Icons.podcasts,
-                          );
+                          final selectedIcon = ref.read(selectedIconProvider);
+                          // final itemTitleText = itemTitle.text;
+
+                          // if (selectedIcon != null &&
+                          //     itemTitleText.isNotEmpty) {
+                          //   final newItem =
+                          //       Item(name: itemTitleText, icon: selectedIcon);
+
+                          //   ref
+                          //       .read(itemsProvider.notifier)
+                          //       .update((items) => items += [newItem]);
+                          //   itemTitle.clear();
+                          // }
+                          final newItem =
+                              Item(name: itemTitle.text, icon: selectedIcon!);
 
                           ref
                               .read(itemsProvider.notifier)

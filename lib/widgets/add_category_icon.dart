@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kashbook_app/provider/selected_icon_provider.dart';
 import 'package:kashbook_app/utils/extension.dart';
 
 class AddIconScreen extends ConsumerWidget {
@@ -9,50 +9,20 @@ class AddIconScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colorScheme;
-    List<IconData> icons = [
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.cableCar,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-      FontAwesomeIcons.utensils,
-    ];
+    final selectedIcon = ref.watch(selectedIconProvider);
+    // void saveSelectedIcon(BuildContext context) {
+    //   final selectedIcon = ref.read(selectedIconProvider);
+
+    //   if (selectedIcon != null) {
+    //     ref.read(savedIconsProvider.notifier).state = [
+    //       ref.read(savedIconsProvider as ProviderListenable<IconData>),
+    //       selectedIcon
+    //     ];
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //         const SnackBar(content: Text('Icons selected successfully')));
+    //   }
+    // }
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -61,7 +31,11 @@ class AddIconScreen extends ConsumerWidget {
             runSpacing: 7,
             children: icons.map((icon) {
               return CustomIconBox(
-                onTap: () {},
+                onTap: () {
+                  // saveSelectedIcon(context);
+                  ref.read(selectedIconProvider.notifier).state = icon;
+                },
+                isSelected: selectedIcon == icon,
                 icon: icon,
                 selectedColor: colors.primary,
                 unSelectedColor: Colors.black,
@@ -75,6 +49,7 @@ class AddIconScreen extends ConsumerWidget {
 class CustomIconBox extends StatefulWidget {
   final VoidCallback onTap;
   final IconData icon;
+  final bool isSelected;
   final Color selectedColor;
   final Color unSelectedColor;
   const CustomIconBox({
@@ -83,6 +58,7 @@ class CustomIconBox extends StatefulWidget {
     required this.icon,
     required this.selectedColor,
     required this.unSelectedColor,
+    required this.isSelected,
   }) : super(key: key);
 
   @override
@@ -99,6 +75,7 @@ class _CustomIconBoxState extends State<CustomIconBox> {
       onTap: () {
         widget.onTap;
         setState(() {
+          //Navigator.pop(context);
           isSelected = !isSelected;
         });
       },

@@ -4,13 +4,14 @@ import 'package:flutter/services.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     this.controller,
-    super.key,
+    super.key, this.onChanged,
   });
-
+  final Function(String)? onChanged;
   final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
       controller: controller,
       decoration: const InputDecoration(
           fillColor: Colors.white, filled: true, border: InputBorder.none),
