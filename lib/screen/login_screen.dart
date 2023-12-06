@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kashbook_app/screen/screen.dart';
@@ -8,13 +7,20 @@ import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
 import 'package:kashbook_app/widgets/custom_textfield.dart';
 import 'package:kashbook_app/widgets/custome_circle.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends StatefulWidget {
+  final ValueChanged<String>? onChanged;
   static LoginScreen builder(BuildContext context, GoRouterState state) =>
       const LoginScreen();
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, this.onChanged});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool obscureText = true;
+  @override
+  Widget build(BuildContext context) {
     final colors = context.colorScheme;
     final deviceSize = context.deviceSize;
     return Scaffold(
@@ -62,7 +68,18 @@ class LoginScreen extends ConsumerWidget {
               const TextFieldTile(
                 title: 'Password',
               ),
-              const CustomTextField(),
+              CustomTextField(
+                obscureText: obscureText,
+                onChanged: widget.onChanged,
+                suffixIcon: IconButton(
+                    icon: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    }),
+              ),
               InkWell(
                   onTap: () {
                     Navigator.push(
@@ -71,7 +88,10 @@ class LoginScreen extends ConsumerWidget {
                             builder: (context) =>
                                 const ForgottenPasswordScreen()));
                   },
-                  child: const Text('Forgotten Password')),
+                  child: const Text(
+                    'Forgotten Password',
+                    style: TextStyle(color: Colors.red),
+                  )),
               const SizedBox(
                 height: 70,
               ),

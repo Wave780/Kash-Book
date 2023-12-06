@@ -17,7 +17,6 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
-    
     final colors = context.colorScheme;
 
     return Scaffold(
@@ -90,17 +89,12 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 }
 
+final nairaFormat = NumberFormat.currency(
+  locale: 'en_NG',
+  symbol: "₦",
+);
 List<dynamic> numberFormate = [
-  NumberFormat.currency(
-    symbol: '₦',
-    locale: 'en_NG',  
-  ).format(1000),
-  NumberFormat.currency(
-    symbol: '₦',
-    locale: 'en_NG',
-  ).format(3000),
-  NumberFormat.currency(
-    symbol: '₦',
-    locale: 'en_NG',
-  ).format(2000),
+  nairaFormat.format(1000),
+  nairaFormat.format(3000),
+  nairaFormat.format(2000),
 ];

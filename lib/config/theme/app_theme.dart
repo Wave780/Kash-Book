@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // private constructor
@@ -17,7 +18,7 @@ class AppTheme {
       swapColors: true,
       lightIsWhite: true,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      //fontFamily: GoogleFonts.damion().fontFamily,
+      fontFamily: GoogleFonts.roboto().fontFamily,
       subThemesData: const FlexSubThemesData(
         useTextTheme: true,
         fabUseShape: true,

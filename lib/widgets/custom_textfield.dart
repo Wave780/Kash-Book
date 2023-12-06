@@ -4,17 +4,26 @@ import 'package:flutter/services.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     this.controller,
-    super.key, this.onChanged,
+    super.key,
+    this.onChanged,
+    this.suffixIcon,
+    this.obscureText,
   });
   final Function(String)? onChanged;
+  final bool? obscureText;
+  final IconButton? suffixIcon;
   final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: obscureText ?? false,
       onChanged: onChanged,
       controller: controller,
-      decoration: const InputDecoration(
-          fillColor: Colors.white, filled: true, border: InputBorder.none),
+      decoration: InputDecoration(
+          suffixIcon: suffixIcon,
+          fillColor: Colors.white,
+          filled: true,
+          border: InputBorder.none),
     );
   }
 }

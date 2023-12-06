@@ -29,8 +29,14 @@ class SideNavBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
+            leading: Icon(
+              Icons.home,
+              color: Colors.purple.shade900,
+            ),
+            title: const Text(
+              'Home',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const RootScreen()));
@@ -40,8 +46,12 @@ class SideNavBar extends StatelessWidget {
             height: 20,
           ),
           ListTile(
-            leading: const Icon(Icons.category),
-            title: const Text('Category'),
+            leading: Icon(
+              Icons.category,
+              color: Colors.red.shade800,
+            ),
+            title: const Text('Category',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             onTap: () {
               Navigator.push(
                   context,
@@ -53,16 +63,24 @@ class SideNavBar extends StatelessWidget {
             height: 20,
           ),
           ListTile(
-            leading: const Icon(Icons.note),
-            title: const Text('Report'),
+            leading: const Icon(
+              Icons.note,
+              color: Colors.green,
+            ),
+            title: const Text('Report',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             onTap: () {},
           ),
           const SizedBox(
             height: 20,
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Setting'),
+            leading: const Icon(
+              Icons.settings,
+              color: Colors.black,
+            ),
+            title: const Text('Setting',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             onTap: () {},
           )
         ],
