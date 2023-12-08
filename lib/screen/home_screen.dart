@@ -22,10 +22,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String drpodownValue = list.first;
+
+  var data;
   @override
   Widget build(BuildContext context) {
-
-
     final colors = context.colorScheme;
     return Scaffold(
         key: _scaffoldKey,
@@ -167,7 +167,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 90,
+                ),
+                Center(
+                    child: Text(
+                  data ?? 'No Transcation',
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ))
               ],
             ),
           ]),

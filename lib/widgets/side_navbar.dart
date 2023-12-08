@@ -81,7 +81,12 @@ class SideNavBar extends StatelessWidget {
             ),
             title: const Text('Setting',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingScreen()));
+            },
           )
         ],
       ),

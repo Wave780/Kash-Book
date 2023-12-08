@@ -20,6 +20,14 @@ class CategoryScreen extends ConsumerWidget {
         ListView.builder(
             itemCount: savedItems.length,
             itemBuilder: (context, index) {
+              if (savedItems.isEmpty) {
+                return const SizedBox(
+                  height: 50,
+                  child: Center(
+                    child: Text('No Item'),
+                  ),
+                );
+              }
               final item = savedItems[index];
               // final icon = icons;
               return ListTile(

@@ -14,3 +14,4 @@ export 'viewrole_bottomsheet_screen.dart';
 export 'trancation_screen.dart';
 export 'category_screen.dart';
 export 'add_category_sccreen.dart';
+export  'setting.dart';
