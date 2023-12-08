@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:kashbook_app/provider/account_card_notifier.dart';
-
 import 'package:kashbook_app/screen/screen.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/acctount_card.dart';
@@ -23,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String drpodownValue = list.first;
 
-  var data;
+  var data; 
   @override
   Widget build(BuildContext context) {
     final colors = context.colorScheme;
