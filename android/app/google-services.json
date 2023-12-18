@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "970765470269",
+    "project_id": "kash-book",
+    "storage_bucket": "kash-book.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970765470269:android:2b90c27742a6dcda46b854",
+        "android_client_info": {
+          "package_name": "com.example.kashbook_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn-blUOQjzYj8zMveAF43IMcGJRNbKMp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

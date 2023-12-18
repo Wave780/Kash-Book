@@ -30,10 +30,15 @@ class CategoryScreen extends ConsumerWidget {
               }
               final item = savedItems[index];
               // final icon = icons;
-              return ListTile(
-                leading: Icon(item.icon),
-                title: Text(item.name),
-              );
+              return Dismissible(
+                  key: Key(item.id.toString()),
+                  onDismissed: (direction) {
+                    ref.read(itemsProvider.notifier).state.remove(item);
+                  },
+                  child: ListTile(
+                    leading: Icon(item.icon),
+                    title: Text(item.name),
+                  ));
             }),
         Positioned(
             bottom: 3.0,

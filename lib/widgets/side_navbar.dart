@@ -69,7 +69,12 @@ class SideNavBar extends StatelessWidget {
             ),
             title: const Text('Report',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ReportScreen()));
+            },
           ),
           const SizedBox(
             height: 20,

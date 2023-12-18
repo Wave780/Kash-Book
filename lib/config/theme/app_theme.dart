@@ -33,4 +33,27 @@ class AppTheme {
         blendTextTheme: true,
         popupMenuOpacity: 0.95,
       ));
+
+      static final dark = FlexThemeData.dark(
+  scheme: FlexScheme.indigo,
+  surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+  blendLevel: 40,
+  appBarStyle: FlexAppBarStyle.primary,
+  appBarOpacity: 0.35,
+  appBarElevation: 0,
+  transparentStatusBar: true,
+  tabBarStyle: FlexTabBarStyle.forBackground,
+  tooltipsMatchBackground: true,
+  swapColors: true,
+  darkIsTrueBlack: true, // Set to false for dark theme
+  visualDensity: FlexColorScheme.comfortablePlatformDensity,
+  fontFamily: GoogleFonts.roboto().fontFamily,
+  subThemesData: const FlexSubThemesData(
+    // Same sub-theme settings as light theme can be used here
+  ),
+);
+
+
+
+
 }

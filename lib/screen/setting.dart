@@ -1,17 +1,14 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:kashbook_app/provider/theme_provider.dart';
 
 import 'setting_tile.dart';
 
-class SettingScreen extends StatefulWidget {
+class SettingScreen extends ConsumerWidget {
   const SettingScreen({super.key});
 
   @override
-  State<SettingScreen> createState() => _SettingScreenState();
-}
-
-class _SettingScreenState extends State<SettingScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 20,
@@ -22,14 +19,22 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Stack(children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const Row(
+                Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Setting',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 30),
-                      )
+                      ),
+                      Switch(
+                        value: ref.watch(isDarkThemeProvider),
+                        onChanged: (bool value) {
+                          ref
+                              .read(isDarkThemeProvider.notifier)
+                              .update((state) => !state);
+                        },
+                      ),
                     ]),
                 const SizedBox(height: 30),
                 const Text(
@@ -50,14 +55,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   title: 'Edit Profile',
                   onTap: () {},
                 ),
-                const Divider(
-                  height: 20,
-                ),
-                SettingTile(
-                  preffixIcon: Icons.light_mode,
-                  title: 'Appearance',
-                  onTap: () {},
-                ),
+                
                 const Divider(
                   height: 20,
                 ),
@@ -125,4 +123,3 @@ class _SettingScreenState extends State<SettingScreen> {
             ])));
   }
 }
-

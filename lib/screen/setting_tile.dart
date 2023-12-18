@@ -5,11 +5,12 @@ class SettingTile extends StatelessWidget {
     super.key,
     required this.preffixIcon,
     required this.title,
-    required this.onTap,
+    this.onTap, this.child,
   });
   final IconData preffixIcon;
   final String title;
-  final VoidCallback onTap;
+  final Widget? child;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(

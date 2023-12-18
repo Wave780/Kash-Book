@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText,
   });
   final Function(String)? onChanged;
+
   final bool? obscureText;
   final IconButton? suffixIcon;
   final TextEditingController? controller;

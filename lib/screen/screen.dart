@@ -15,3 +15,4 @@ export 'trancation_screen.dart';
 export 'category_screen.dart';
 export 'add_category_sccreen.dart';
 export  'setting.dart';
+export 'report.dart';

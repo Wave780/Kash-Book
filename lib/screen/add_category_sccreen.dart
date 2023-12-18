@@ -4,18 +4,27 @@ import 'package:kashbook_app/model/category_item.dart';
 import 'package:kashbook_app/provider/items_provider.dart';
 import 'package:kashbook_app/provider/selected_icon_provider.dart';
 import 'package:kashbook_app/screen/screen.dart';
+import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/add_category_icon.dart';
 
 import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
 import 'package:kashbook_app/widgets/custom_textfield.dart';
 
-class AddCategoryScreen extends ConsumerWidget {
+class AddCategoryScreen extends ConsumerStatefulWidget {
   const AddCategoryScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AddCategoryScreen> createState() => _AddCategoryScreenState();
+}
+
+class _AddCategoryScreenState extends ConsumerState<AddCategoryScreen> {
+  @override
+  Widget build(BuildContext context) {
     final itemTitle = TextEditingController();
 
+    final colors = context.colorScheme;
+
+    final selectedIcon = ref.read(iconProvider);
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 20,
@@ -41,53 +50,53 @@ class AddCategoryScreen extends ConsumerWidget {
             const SizedBox(
               height: 10,
             ),
-            OutlinedButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) => const AddIconScreen());
-                },
-                child: const Text('Select an Icons')),
+            const Text('Select an Icons'),
+            Wrap(
+                spacing: 7,
+                runSpacing: 7,
+                children: icons.map((icon) {
+                  return CustomIconBox(
+                    onTap: () {
+                      ref.read(iconProvider.notifier).state = icon;
+                    },
+                    isSelected: selectedIcon == icon,
+                    icon: icon,
+                    selectedColor: colors.primary,
+                    unSelectedColor: Colors.black,
+                  );
+                }).toList()),
+            // OutlinedButton(
+            //     onPressed: () {
+            //       showModalBottomSheet(
+            //           context: context,
+            //           builder: (context) => const AddIconScreen());
+            //     },
+            //     child: const Text('Select an Icons')),
             const SizedBox(
               height: 50,
             ),
-            Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                return SizedBox(
-                    width: 350,
-                    height: 50,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          final selectedIcon = ref.read(selectedIconProvider);
-                          // final itemTitleText = itemTitle.text;
+            SizedBox(
+                width: 350,
+                height: 50,
+                child: ElevatedButton(
+                    onPressed: () {
+                      if (selectedIcon != null) {
+                        final newItem = Item(
+                          name: itemTitle.text,
+                          icon: selectedIcon,
+                        );
 
-                          // if (selectedIcon != null &&
-                          //     itemTitleText.isNotEmpty) {
-                          //   final newItem =
-                          //       Item(name: itemTitleText, icon: selectedIcon);
-
-                          //   ref
-                          //       .read(itemsProvider.notifier)
-                          //       .update((items) => items += [newItem]);
-                          //   itemTitle.clear();
-                          // }
-                          final newItem =
-                              Item(name: itemTitle.text, icon: selectedIcon!);
-
-                          ref
-                              .read(itemsProvider.notifier)
-                              .update((items) => items += [newItem]);
-                          itemTitle.clear();
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const CategoryScreen()));
-                        },
-                        child: const Text('ADD ITEM')));
-              },
-            )
+                        ref
+                            .watch(itemsProvider.notifier)
+                            .update((items) => items += [newItem]);
+                        itemTitle.clear();
+                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CategoryScreen()));
+                    },
+                    child: const Text('ADD ITEM')))
           ]),
         ));
   }
