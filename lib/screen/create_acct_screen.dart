@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kashbook_app/provider/auth_service_provider.dart';
+import 'package:kashbook_app/provider/show_password..dart';
 import 'package:kashbook_app/screen/login_screen.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/custom_button.dart';
@@ -10,8 +12,20 @@ import 'package:kashbook_app/widgets/custome_circle.dart';
 
 class CreateAcctScreen extends ConsumerWidget {
   static CreateAcctScreen builder(BuildContext context, GoRouterState state) =>
-      const CreateAcctScreen();
-  const CreateAcctScreen({super.key});
+      CreateAcctScreen();
+  CreateAcctScreen({super.key});
+
+  bool showPassword = true;
+
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -62,14 +76,24 @@ class CreateAcctScreen extends ConsumerWidget {
             const TextFieldTile(
               title: 'Email',
             ),
-            const CustomTextField(),
+            CustomTextField(controller: emailController),
             const SizedBox(
               height: 25.0,
             ),
             const TextFieldTile(
               title: 'Password',
             ),
-            const CustomTextField(),
+            CustomTextField(
+              controller: passwordController,
+              obscureText: ref.watch(showPasswordProvider),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                      showPassword ? Icons.visibility_off : Icons.visibility),
+                  onPressed: () {
+                    ref.read(showPasswordProvider.notifier).state =
+                        !showPassword;
+                  }),
+            ),
             const SizedBox(
               height: 25.0,
             ),
@@ -83,10 +107,14 @@ class CreateAcctScreen extends ConsumerWidget {
             Center(
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CreateAcctScreen()));
+                  ref.watch(authServiceProvider)!.signUpWithEmail(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      context: context);
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) =>  CreateAcctScreen()));
                 },
                 child: CustomButton(
                   deviceSize: deviceSize.width * 0.70,

@@ -62,7 +62,7 @@ class ForgottenPasswordScreen extends ConsumerWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CreateAcctScreen()));
+                            builder: (context) =>  CreateAcctScreen()));
                   },
                   child: CustomButton(
                     deviceSize: deviceSize.width * 0.70,

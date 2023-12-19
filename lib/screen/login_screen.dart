@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kashbook_app/screen/screen.dart';
+import 'package:kashbook_app/service/firebase_auth_method.dart';
 import 'package:kashbook_app/utils/extension.dart';
 import 'package:kashbook_app/widgets/custom_button.dart';
 import 'package:kashbook_app/widgets/custom_tesxtField_tile.dart';
@@ -19,6 +21,24 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool obscureText = true;
+
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void signInUser() async {
+    FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+        email: emailController.text,
+        password: passwordController.text,
+        context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = context.colorScheme;
@@ -61,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const TextFieldTile(
                 title: 'Email',
               ),
-              const CustomTextField(),
+              CustomTextField(controller: emailController),
               const SizedBox(
                 height: 40.0,
               ),
@@ -69,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: 'Password',
               ),
               CustomTextField(
+                controller: passwordController,
                 obscureText: obscureText,
                 onChanged: widget.onChanged,
                 suffixIcon: IconButton(
@@ -97,12 +118,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Center(
                 child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RootScreen()));
-                  },
+                  onTap: signInUser,
+                  // onTap: () {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const RootScreen()));
+                  // },
                   child: CustomButton(
                     deviceSize: deviceSize.width * 0.70,
                     text: 'Sign In',
@@ -127,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const CreateAcctScreen()));
+                              builder: (context) => CreateAcctScreen()));
                     },
                     child: Text('Sign Up',
                         style: TextStyle(
