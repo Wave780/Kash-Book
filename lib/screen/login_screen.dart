@@ -33,10 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void signInUser() async {
-    FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+   await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
         email: emailController.text,
         password: passwordController.text,
-        context: context);
+        context:context );
   }
 
   @override

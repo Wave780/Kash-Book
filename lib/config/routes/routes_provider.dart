@@ -5,6 +5,8 @@ import 'app_location.dart';
 import 'app_routes.dart';
 
 final routesProvider = Provider<GoRouter>((ref) => GoRouter(
-    initialLocation: RouteLocation.splashScreen,
-    navigatorKey: navigationKey,
-    routes: appRoutes));
+      initialLocation: RouteLocation.splashScreen,
+      navigatorKey: navigationKey,
+      routes: appRoutes,
+     
+    ));

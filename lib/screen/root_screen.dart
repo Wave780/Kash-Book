@@ -16,6 +16,7 @@ class RootScreen extends ConsumerWidget {
     return Scaffold(
       drawer: sideNaveBar,
       bottomNavigationBar: const ButtomNavBar(),
+      
     );
   }
 }

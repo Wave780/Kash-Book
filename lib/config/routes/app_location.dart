@@ -5,6 +5,7 @@ class RouteLocation {
   const RouteLocation._();
 
   static String get splashScreen => '/splashScreen';
+  static String get authScreen => '/authScreen';
   static String get welcomeScreen => '/welcomeScreen';
   static String get loginScreen => '/loginScreen';
   static String get createAcctScreen => '/createAcctScreen';
