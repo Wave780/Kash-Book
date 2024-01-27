@@ -36,7 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
    await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
         email: emailController.text,
         password: passwordController.text,
-        context:context );
+        context:context ).then((value) {
+          return ;
+        });
   }
 
   @override

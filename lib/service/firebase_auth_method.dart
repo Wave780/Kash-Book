@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kashbook_app/config/routes/app_location.dart';
 import 'package:kashbook_app/utils/showSnackBar.dart';
 
 class FirebaseAuthMethods {
@@ -23,19 +25,30 @@ class FirebaseAuthMethods {
   }
 
 // EMAIL LOGIN
-  Future<void> loginWithEmail({
+  Future<UserCredential?> loginWithEmail({
     required String email,
     required String password,
     required BuildContext context,
   }) async {
+    UserCredential? userCredential;
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-      if (!auth.currentUser!.emailVerified) {
-        await sendEmailVerification(context);
-      }
+      await auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) async {
+        userCredential = value;
+        if (!auth.currentUser!.emailVerified) {
+          await sendEmailVerification(context);
+        } else {
+          context.push(RouteLocation.homeScreen, extra: userCredential);
+        }
+        return value;
+      });
+
+      return userCredential;
     } on FirebaseAuthException catch (e) {
-       showSnackBar(context, e.message!);
+      showSnackBar(context, e.message!);
     }
+    return null;
   }
 
 //EMAIL VERIFICATION
